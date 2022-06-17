@@ -6,7 +6,7 @@ namespace Chess_Console
         static void Main(string[] args)
         {
             Tabuleiro x = new Tabuleiro(8,8);
-
+            Tela.DisplayTela(x);
         }
     }
 }
