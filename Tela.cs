@@ -15,7 +15,7 @@ namespace Chess_Console
                     }
                     else
                     {
-                        Console.Write(tab.peca + " ");
+                        Console.Write(tab.peca(i,j) + " ");
                     }
                 }
                 Console.WriteLine();
