@@ -19,6 +19,10 @@ namespace Chess_Console
 
                     Console.Write("Escolha a peça que quer movimentar pela posicao: ");
                     Posicao Origem = Tela.LerPosicaoXadrez().ConverterPosicao();
+                    bool[,] posicoespossiveis = partida.Tab_pt.peca(Origem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    Tela.DisplayTela(partida.Tab_pt, posicoespossiveis);
 
                     Console.Write("Escolha a posição de destino: ");
                     Posicao Destino = Tela.LerPosicaoXadrez().ConverterPosicao();

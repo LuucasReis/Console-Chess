@@ -11,16 +11,9 @@ namespace Chess_Console
                 Console.Write(tab.Linhas_tab - i + " ");
                 for (int j=0; j< tab.Colunas_tab; j++)
                 {
-                    if (tab.peca(i,j) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        ImprimirPecas(tab.peca(i,j));
-                        Console.Write(" ");
-                    }
+                    ImprimirPecas(tab.peca(i,j));
                 }
+                
                 Console.WriteLine();
             }
 
@@ -31,18 +24,60 @@ namespace Chess_Console
                 Console.Write((char)(letra + i)+ " ");
             }
         }
-        public static void ImprimirPecas(Peca peca)
+
+        public static void DisplayTela(Tabuleiro tab, bool[,]displayposicoes)
         {
-            if (peca.Cor_peca == Cor.Branca)
+            ConsoleColor fundo_original = Console.BackgroundColor;
+            ConsoleColor fundo_alterado = ConsoleColor.DarkGray;
+            for (int i=0; i < tab.Linhas_tab; i++)
             {
-                Console.Write(peca);
+                Console.Write(tab.Linhas_tab - i + " ");
+                for (int j=0; j< tab.Colunas_tab; j++)
+                {
+                    if (displayposicoes[i,j])
+                    {
+                        Console.BackgroundColor = fundo_alterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundo_original;
+                    }
+                    ImprimirPecas(tab.peca(i,j));
+                    Console.BackgroundColor = fundo_original;
+                }
+                
+                Console.WriteLine();
+                Console.BackgroundColor = fundo_original;
             }
+
+            Console.Write("  ");
+            char letra = 'A';
+            for (int i=0 ; i < tab.Colunas_tab; i++)
+            {
+                Console.Write((char)(letra + i)+ " ");
+            }
+        }
+        public static void ImprimirPecas(Peca peca)
+        {   
+            if (peca == null)
+            {
+                Console.Write("- ");
+            }
+
             else
             {
-                ConsoleColor padrao = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
-                Console.ForegroundColor = padrao;
+                if (peca.Cor_peca == Cor.Branca)
+                {
+                    Console.Write(peca);
+                }
+                else
+                {
+                    ConsoleColor padrao = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(peca);
+                    Console.ForegroundColor = padrao;
+                }
+                Console.Write(" ");
             }
         }
 
