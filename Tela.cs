@@ -5,9 +5,9 @@ namespace Chess_Console
     {
         public static void DisplayTela(Tabuleiro tab)
         {
-            for (int i=0; i < tab.Linhas; i++)
+            for (int i=0; i < tab.Linhas_tab; i++)
             {
-                for (int j=0; j< tab.Colunas; j++)
+                for (int j=0; j< tab.Colunas_tab; j++)
                 {
                     if (tab.peca(i,j) == null)
                     {

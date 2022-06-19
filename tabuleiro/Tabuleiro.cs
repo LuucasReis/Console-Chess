@@ -3,9 +3,9 @@ namespace tabuleiro
 {
     public class Tabuleiro
     {
-        public int Linhas {get; set;}
-        public int Colunas {get; set;}
-        private Peca[,] pecas;
+        public int Linhas_tab {get; set;}
+        public int Colunas_tab {get; set;}
+        private Peca[,] pecas_tab;
 
         public Tabuleiro()
         {
@@ -13,19 +13,19 @@ namespace tabuleiro
 
         public Tabuleiro(int linhas, int colunas)
         {
-            Linhas= linhas;
-            Colunas= colunas;
-            pecas= new Peca[linhas, colunas];
+            Linhas_tab= linhas;
+            Colunas_tab= colunas;
+            pecas_tab= new Peca[linhas, colunas];
         }
 
         public Peca peca(int linha, int coluna)
         {
-            return pecas[linha, coluna];
+            return pecas_tab[linha, coluna];
         }
 
         public Peca peca(Posicao p)
         {
-            return pecas[p.Linha, p.Coluna];
+            return pecas_tab[p.Linha, p.Coluna];
         }
         
         public bool ExistePeca(Posicao p)
@@ -35,7 +35,7 @@ namespace tabuleiro
         }
         public bool ValidaPosicao(Posicao p)
         {
-            if (p.Linha < 0 || p.Linha >= Linhas || p.Coluna<0 || p.Coluna >= Colunas)
+            if (p.Linha < 0 || p.Linha >= Linhas_tab || p.Coluna<0 || p.Coluna >= Colunas_tab)
             {
                 return false;
             }
@@ -56,8 +56,8 @@ namespace tabuleiro
             {
                 throw new DomainException ("Esta posição ja esta ocupada!");
             }
-            pecas[posicion.Linha, posicion.Coluna] = p;
-            p.Posicao= posicion;
+            pecas_tab[posicion.Linha, posicion.Coluna] = p;
+            p.Posicao_peca= posicion;
         }
     }
 }

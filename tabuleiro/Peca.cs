@@ -2,10 +2,10 @@ namespace tabuleiro
 {
     public class Peca
     {
-        public Posicao Posicao {get; set;}
-        public Cor Cor {get; protected set;}
+        public Posicao Posicao_peca {get; set;}
+        public Cor Cor_peca {get; protected set;}
         public int QuantidadeMov {get; protected set;}
-        public Tabuleiro Tab {get; protected set;}
+        public Tabuleiro Tab_peca {get; protected set;}
 
         public Peca()
         {
@@ -13,9 +13,9 @@ namespace tabuleiro
 
         public Peca(Tabuleiro tab, Cor cor)
         {
-            Posicao = null;
-            Cor = cor;
-            Tab = tab;
+            Posicao_peca = null;
+            Cor_peca = cor;
+            Tab_peca = tab;
             QuantidadeMov = 0;
         }
     }
