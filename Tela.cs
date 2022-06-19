@@ -1,4 +1,5 @@
 using tabuleiro;
+using Xadrez;
 namespace Chess_Console
 {
     public class Tela
@@ -43,6 +44,14 @@ namespace Chess_Console
                 Console.Write(peca);
                 Console.ForegroundColor = padrao;
             }
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string mov = Console.ReadLine();
+            char Coluna_mov = mov[0];
+            int linha_mov = int.Parse(mov[1]+ "");
+            return new PosicaoXadrez(Coluna_mov, linha_mov);
         }    
     }
 }

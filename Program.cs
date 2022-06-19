@@ -9,19 +9,23 @@ namespace Chess_Console
         {   
             try
             {   
-                Tabuleiro x = new Tabuleiro(8,8);
-            
-                x.ColocarPeca(new Rei(x, Cor.Preta),new Posicao(0,0));
-                x.ColocarPeca(new Torre(x, Cor.Preta),new Posicao(1,3));
-                x.ColocarPeca(new Torre(x, Cor.Preta),new Posicao(0,2));
+                PartidaXadrez partida = new PartidaXadrez();
 
-                x.ColocarPeca(new Torre(x, Cor.Branca), new Posicao(0,1));
-                x.ColocarPeca(new Torre(x, Cor.Branca),new Posicao(1,4));
-                x.ColocarPeca(new Torre(x, Cor.Branca),new Posicao(0,3));
+                while (!partida.PartidaTerminada)
+                {
+                    Console.Clear();
+                    Tela.DisplayTela(partida.Tab_pt);
+                    Console.WriteLine();
 
+                    Console.Write("Escolha a peça que quer movimentar pela posicao: ");
+                    Posicao Origem = Tela.LerPosicaoXadrez().ConverterPosicao();
 
-                Tela.DisplayTela(x);
-                Console.ReadLine();
+                    Console.Write("Escolha a posição de destino: ");
+                    Posicao Destino = Tela.LerPosicaoXadrez().ConverterPosicao();
+                    partida.ExecutaMovimento(Origem, Destino);
+
+                }
+                
             }
 
             catch(DomainException e)

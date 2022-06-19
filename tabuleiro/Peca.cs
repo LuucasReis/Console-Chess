@@ -18,5 +18,10 @@ namespace tabuleiro
             Tab_peca = tab;
             QuantidadeMov = 0;
         }
+
+        public void Movimentou()
+        {
+            QuantidadeMov++;
+        }
     }
 }

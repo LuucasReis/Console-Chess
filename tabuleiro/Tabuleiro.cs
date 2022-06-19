@@ -59,5 +59,21 @@ namespace tabuleiro
             pecas_tab[posicion.Linha, posicion.Coluna] = p;
             p.Posicao_peca= posicion;
         }
+
+        public Peca RetirarPeca(Posicao p)
+        {
+            if (peca(p) == null)
+            {
+                return null;
+            }
+
+            else
+            {
+                Peca Aux = peca(p);
+                Aux.Posicao_peca = null;
+                pecas_tab[p.Linha, p.Coluna] = null;
+                return Aux;
+            }
+        }
     }
 }
