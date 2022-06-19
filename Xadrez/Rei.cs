@@ -24,7 +24,7 @@ namespace Xadrez
             Posicao mov_posicao = new Posicao(0,0);
 
             //acima
-            mov_posicao.DefinirValores(Posicao_peca.Linha + 1, Posicao_peca.Coluna);
+            mov_posicao.DefinirValores(Posicao_peca.Linha - 1, Posicao_peca.Coluna);
             if (Tab_peca.ValidaPosicao(mov_posicao) && PodeMover(mov_posicao))
             {
                 matriz[mov_posicao.Linha, mov_posicao.Coluna] = true;
