@@ -1,9 +1,28 @@
 using tabuleiro;
 using Xadrez;
+using System.Collections.Generic;
 namespace Chess_Console
 {
     public class Tela
-    {
+    {   
+        public static void ImprimirPecasCapturadas(PartidaXadrez partida)
+        {
+            Console.WriteLine("Peças Capturadas:");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.SepararPecasCapturadas(Cor.Branca));
+            Console.Write(" Pretas: ");
+            ImprimirConjunto(partida.SepararPecasCapturadas(Cor.Preta));
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach(Peca p in conjunto)
+            {
+                Console.Write(p + ",");
+            }
+            Console.Write("]");
+        }
         public static void DisplayTela(Tabuleiro tab)
         {
             for (int i=0; i < tab.Linhas_tab; i++)
@@ -18,7 +37,7 @@ namespace Chess_Console
             }
 
             Console.Write("  ");
-            char letra = 'A';
+            char letra = 'a';
             for (int i=0 ; i < tab.Colunas_tab; i++)
             {
                 Console.Write((char)(letra + i)+ " ");
@@ -43,7 +62,7 @@ namespace Chess_Console
                         Console.BackgroundColor = fundo_original;
                     }
                     ImprimirPecas(tab.peca(i,j));
-                    Console.BackgroundColor = fundo_original;
+                    
                 }
                 
                 Console.WriteLine();
@@ -51,7 +70,7 @@ namespace Chess_Console
             }
 
             Console.Write("  ");
-            char letra = 'A';
+            char letra = 'a';
             for (int i=0 ; i < tab.Colunas_tab; i++)
             {
                 Console.Write((char)(letra + i)+ " ");

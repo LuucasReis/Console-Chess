@@ -17,13 +17,16 @@ namespace Chess_Console
                         Console.Clear();
                         Tela.DisplayTela(partida.Tab_pt);
                         Console.WriteLine();
+                        Tela.ImprimirPecasCapturadas(partida);
+                        Console.WriteLine();
                         Console.WriteLine("Turno: "+partida.Turno);
                         Console.WriteLine("Jogada da peça: "+ partida.JogadorAtual);
 
                         Console.Write("Escolha a peça que quer movimentar pela posicao: ");
                         Posicao Origem = Tela.LerPosicaoXadrez().ConverterPosicao();
-                        bool[,] posicoespossiveis = partida.Tab_pt.peca(Origem).MovimentosPossiveis();
                         partida.ValidarPosicaoOrigem(Origem);
+                        bool[,] posicoespossiveis = partida.Tab_pt.peca(Origem).MovimentosPossiveis();
+                        
 
                         Console.Clear();
                         Tela.DisplayTela(partida.Tab_pt, posicoespossiveis);
@@ -33,6 +36,8 @@ namespace Chess_Console
                         Posicao Destino = Tela.LerPosicaoXadrez().ConverterPosicao();
                         partida.ValidarPosicaoDestino(Origem,Destino);
                         partida.RealizaJogada(Origem, Destino);
+
+                        
                         }
                     catch(DomainException e){
                         Console.WriteLine(e.Message);
