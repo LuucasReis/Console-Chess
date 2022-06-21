@@ -11,12 +11,6 @@ namespace Xadrez
         {
             return "R";
         }
-
-        private bool PodeMover(Posicao pos)
-        {
-            Peca p = Tab_peca.peca(pos);
-            return p== null || p.Cor_peca != Cor_peca;
-        }
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matriz = new bool[Tab_peca.Linhas_tab, Tab_peca.Colunas_tab];

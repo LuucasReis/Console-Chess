@@ -28,6 +28,12 @@ namespace tabuleiro
             QuantidadeMov++;
         }
 
+        protected bool PodeMover(Posicao pos)
+        {
+            Peca p = Tab_peca.peca(pos);
+            return p== null || p.Cor_peca != Cor_peca;
+        }
+
         public bool ExisteMovimentosPossiveis()
         {
             bool[,] mat = MovimentosPossiveis();
