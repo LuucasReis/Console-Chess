@@ -72,8 +72,15 @@ namespace Xadrez
             {
                 Xeque = false;
             }
-            Turno++;
-            MudaJogador();
+            if (testeXequemate(Adversaria(JogadorAtual))) 
+            {
+                PartidaTerminada = true;
+            }
+            else {
+                Turno++;
+                MudaJogador();
+            }
+            
         }
 
         public void ValidarPosicaoOrigem(Posicao p)
@@ -182,6 +189,34 @@ namespace Xadrez
                 }
             }
             return false;
+        }
+
+        public bool testeXequemate(Cor cor) {
+            if (!EstaEmXeque(cor)) {
+                return false;
+            }
+            foreach (Peca x in PecasEmJogo(cor)) {
+                bool[,] mat = x.MovimentosPossiveis();
+                for (int i=0; i<Tab_pt.Linhas_tab; i++) {
+                    for (int j=0; j<Tab_pt.Colunas_tab; j++) 
+                    {
+                        if (mat[i, j]) 
+                        {
+                            Posicao origem = x.Posicao_peca;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+                            
+                            if (!testeXeque) 
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
