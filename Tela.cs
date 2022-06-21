@@ -5,13 +5,33 @@ namespace Chess_Console
 {
     public class Tela
     {   
+        public static void ImprimirPartida(PartidaXadrez partida)
+        {
+            
+            DisplayTela(partida.Tab_pt, partida);
+            Console.WriteLine();
+
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+
+            Console.WriteLine("Turno: "+partida.Turno);
+            Console.WriteLine("Jogada da peça: "+ partida.JogadorAtual);
+            if (partida.Xeque)
+            {
+                Console.WriteLine("XEQUE!!");
+            }
+
+        }
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
         {
             Console.WriteLine("Peças Capturadas:");
             Console.Write("Brancas: ");
             ImprimirConjunto(partida.SepararPecasCapturadas(Cor.Branca));
             Console.Write(" Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             ImprimirConjunto(partida.SepararPecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;
         }
 
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
@@ -23,14 +43,14 @@ namespace Chess_Console
             }
             Console.Write("]");
         }
-        public static void DisplayTela(Tabuleiro tab)
+        public static void DisplayTela(Tabuleiro tab, PartidaXadrez partida)
         {
             for (int i=0; i < tab.Linhas_tab; i++)
             {
                 Console.Write(tab.Linhas_tab - i + " ");
                 for (int j=0; j< tab.Colunas_tab; j++)
                 {
-                    ImprimirPecas(tab.peca(i,j));
+                    ImprimirPecas(tab.peca(i,j), partida);
                 }
                 
                 Console.WriteLine();
@@ -44,7 +64,7 @@ namespace Chess_Console
             }
         }
 
-        public static void DisplayTela(Tabuleiro tab, bool[,]displayposicoes)
+        public static void DisplayTela(Tabuleiro tab, bool[,] displayposicoes, PartidaXadrez partida)
         {
             ConsoleColor fundo_original = Console.BackgroundColor;
             ConsoleColor fundo_alterado = ConsoleColor.DarkGray;
@@ -61,7 +81,7 @@ namespace Chess_Console
                     {
                         Console.BackgroundColor = fundo_original;
                     }
-                    ImprimirPecas(tab.peca(i,j));
+                    ImprimirPecas(tab.peca(i,j), partida);
                     
                 }
                 
@@ -76,7 +96,7 @@ namespace Chess_Console
                 Console.Write((char)(letra + i)+ " ");
             }
         }
-        public static void ImprimirPecas(Peca peca)
+        public static void ImprimirPecas(Peca peca, PartidaXadrez partida)
         {   
             if (peca == null)
             {
@@ -85,7 +105,15 @@ namespace Chess_Console
 
             else
             {
-                if (peca.Cor_peca == Cor.Branca)
+                if (partida.EstaEmXeque(partida.JogadorAtual) && peca is Rei && peca.Cor_peca == partida.JogadorAtual)
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(peca);
+                    Console.ForegroundColor = aux;
+                }
+                
+                else if (peca.Cor_peca == Cor.Branca)
                 {
                     Console.Write(peca);
                 }
@@ -96,6 +124,7 @@ namespace Chess_Console
                     Console.Write(peca);
                     Console.ForegroundColor = padrao;
                 }
+
                 Console.Write(" ");
             }
         }

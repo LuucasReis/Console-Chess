@@ -66,7 +66,7 @@ namespace Xadrez
                 }
                 mov_posicao.Coluna --;
             }
-
+            
             return matriz;
         }
 

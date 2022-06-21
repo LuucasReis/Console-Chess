@@ -15,31 +15,27 @@ namespace Chess_Console
                 {   
                     try{
                         Console.Clear();
-                        Tela.DisplayTela(partida.Tab_pt);
-                        Console.WriteLine();
-                        Tela.ImprimirPecasCapturadas(partida);
-                        Console.WriteLine();
-                        Console.WriteLine("Turno: "+partida.Turno);
-                        Console.WriteLine("Jogada da peça: "+ partida.JogadorAtual);
+                        Tela.ImprimirPartida(partida);
 
                         Console.Write("Escolha a peça que quer movimentar pela posicao: ");
                         Posicao Origem = Tela.LerPosicaoXadrez().ConverterPosicao();
                         partida.ValidarPosicaoOrigem(Origem);
                         bool[,] posicoespossiveis = partida.Tab_pt.peca(Origem).MovimentosPossiveis();
                         
-
                         Console.Clear();
-                        Tela.DisplayTela(partida.Tab_pt, posicoespossiveis);
+                        Tela.DisplayTela(partida.Tab_pt, posicoespossiveis, partida);
+                        
 
                         Console.WriteLine();
                         Console.Write("Escolha a posição de destino: ");
                         Posicao Destino = Tela.LerPosicaoXadrez().ConverterPosicao();
                         partida.ValidarPosicaoDestino(Origem,Destino);
                         partida.RealizaJogada(Origem, Destino);
-
+                        
                         
                         }
                     catch(DomainException e){
+                        
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
@@ -49,6 +45,7 @@ namespace Chess_Console
 
             catch(DomainException e)
             {
+                
                 Console.WriteLine(e.Message);
             }
         }

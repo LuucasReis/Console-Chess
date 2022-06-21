@@ -19,6 +19,10 @@ namespace tabuleiro
             QuantidadeMov = 0;
         }
 
+        public void Decrementou()
+        {
+            QuantidadeMov--;
+        }
         public void Movimentou()
         {
             QuantidadeMov++;
@@ -33,10 +37,12 @@ namespace tabuleiro
                 {
                     if (mat[i,j])
                     {
+                        
                         return true;
                     }
                 }
             }
+            
             return false;
         }
         
