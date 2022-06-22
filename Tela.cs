@@ -19,7 +19,18 @@ namespace Chess_Console
             if (!partida.PartidaTerminada) {
                 Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
                 if (partida.Xeque) {
-                    Console.WriteLine("XEQUE!");
+                    Console.Clear();
+                    Console.WriteLine($" A COR {partida.JogadorAtual} ESTA EM XEQUE!");
+                    Console.ReadLine();
+                    Console.Clear();
+                    DisplayTela(partida.Tab_pt, partida);
+                    Console.WriteLine();
+
+                    ImprimirPecasCapturadas(partida);
+                    Console.WriteLine();
+
+                    Console.WriteLine("Turno: "+partida.Turno);
+                    Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
                 }
             }
             else {

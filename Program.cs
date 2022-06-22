@@ -35,7 +35,7 @@ namespace Chess_Console
                         
                         }
                     catch(DomainException e){
-                        
+                        Console.Clear();
                         Console.WriteLine(e.Message);
                         Console.ReadLine();
                     }
