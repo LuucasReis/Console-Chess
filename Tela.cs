@@ -7,7 +7,7 @@ namespace Chess_Console
     {   
         public static void ImprimirPartida(PartidaXadrez partida)
         {
-            
+            Console.Clear();
             DisplayTela(partida.Tab_pt, partida);
             Console.WriteLine();
 

@@ -3,8 +3,10 @@ namespace Xadrez
 {
     public class Peao : Peca
     {
-        public Peao(Tabuleiro tab, Cor cor): base(tab, cor)
+        private PartidaXadrez Partida;
+        public Peao(Tabuleiro tab, Cor cor, PartidaXadrez partida): base(tab, cor)
         {
+            Partida = partida;
         }
 
         public override string ToString()
@@ -53,6 +55,22 @@ namespace Xadrez
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
+
+                //Jogada Especial - En Passant (Brancas)
+                if (Posicao_peca.Linha == 3)
+                {
+                    Posicao esquerda_peao = new Posicao(Posicao_peca.Linha, Posicao_peca.Coluna -1 );
+                    if (Tab_peca.ValidaPosicao(esquerda_peao) && existeInimigo(esquerda_peao) && Tab_peca.peca(esquerda_peao) == Partida.PossivelEnPassant)
+                    {
+                        mat[esquerda_peao.Linha -1, esquerda_peao.Coluna] = true;
+                    }
+
+                     Posicao direita_peao = new Posicao(Posicao_peca.Linha, Posicao_peca.Coluna +1 );
+                    if (Tab_peca.ValidaPosicao(direita_peao) && existeInimigo(direita_peao) && Tab_peca.peca(direita_peao) == Partida.PossivelEnPassant)
+                    {
+                        mat[direita_peao.Linha -1, direita_peao.Coluna] = true;
+                    }
+                }
             }
             else 
             {
@@ -79,6 +97,22 @@ namespace Xadrez
                 if (Tab_peca.ValidaPosicao(pos) && existeInimigo(pos)) 
                 {
                     mat[pos.Linha, pos.Coluna] = true;
+                }
+
+                //Jogada Especial - En Passant (Pretas)
+                if (Posicao_peca.Linha == 4)
+                {
+                    Posicao esquerda_peao = new Posicao(Posicao_peca.Linha, Posicao_peca.Coluna -1 );
+                    if (Tab_peca.ValidaPosicao(esquerda_peao) && existeInimigo(esquerda_peao) && Tab_peca.peca(esquerda_peao) == Partida.PossivelEnPassant)
+                    {
+                        mat[esquerda_peao.Linha +1, esquerda_peao.Coluna] = true;
+                    }
+
+                     Posicao direita_peao = new Posicao(Posicao_peca.Linha, Posicao_peca.Coluna +1 );
+                    if (Tab_peca.ValidaPosicao(direita_peao) && existeInimigo(direita_peao) && Tab_peca.peca(direita_peao) == Partida.PossivelEnPassant)
+                    {
+                        mat[direita_peao.Linha +1, direita_peao.Coluna] = true;
+                    }
                 }
             }
 
